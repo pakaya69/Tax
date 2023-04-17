@@ -1,58 +1,30 @@
-// Get the input element and buttons
-const monthlyIncomeInput = document.getElementById('monthly-income');
-const calculateButton = document.getElementById('calculate');
-const resetButton = document.getElementById('reset');
+const calculateBtn = document.getElementById("calculateBtn");
 
-// Get the output elements
-const monthlyTaxOutput = document.getElementById('monthly-tax');
-const epfOutput = document.getElementById('epf');
-const takeHomeSalaryOutput = document.getElementById('take-home-salary');
+calculateBtn.addEventListener("click", () => {
+  const monthlyIncome = parseFloat(document.getElementById("monthlyIncome").value);
 
-// Add event listeners to the buttons
-calculateButton.addEventListener('click', calculate);
-resetButton.addEventListener('click', reset);
-
-function calculate() {
-  // Get the monthly income
-  const monthlyIncome = Number(monthlyIncomeInput.value);
-  
-  // Calculate the monthly tax
-  let monthlyTax = 0;
+  // calculate monthly tax expense
+  let monthlyTaxExpense = 0;
   const annualIncome = monthlyIncome * 12;
   
-  if (annualIncome > 1200000) {
-    const remainingIncome = annualIncome - 1200000;
-    if (remainingIncome <= 500000) {
-      monthlyTax = remainingIncome * 0.06;
-    } else if (remainingIncome <= 1000000) {
-      monthlyTax = (remainingIncome - 500000) * 0.12 + (500000 * 0.06);
-    } else if (remainingIncome <= 1500000) {
-      monthlyTax = (remainingIncome - 1000000) * 0.18 + (500000 * 0.12) + (500000 * 0.06);
-    } else if (remainingIncome <= 2000000) {
-      monthlyTax = (remainingIncome - 1500000) * 0.24 + (500000 * 0.18) + (500000 * 0.12) + (500000 * 0.06);
-    } else if (remainingIncome <= 2500000) {
-      monthlyTax = (remainingIncome - 2000000) * 0.30 + (500000 * 0.24) + (500000 * 0.18) + (500000 * 0.12) + (500000 * 0.06);
-    } else {
-      monthlyTax = (remainingIncome - 2500000) * 0.36 + (500000 * 0.30) + (500000 * 0.24) + (500000 * 0.18) + (500000 * 0.12) + (500000 * 0.06);
-    }
+  if (annualIncome > 1200000 && annualIncome <= 1700000) {
+    monthlyTaxExpense = ((annualIncome - 1200000) * 0.06) / 12;
+  } else if (annualIncome > 1700000 && annualIncome <= 2200000) {
+    monthlyTaxExpense = (((annualIncome - 1700000) * 0.12) + (500000 * 0.06)) / 12;
+  } else if (annualIncome > 2200000 && annualIncome <= 2700000) {
+    monthlyTaxExpense = (((annualIncome - 2200000) * 0.18) + (500000 * 0.06) + (500000 * 0.12)) / 12;
+  } else if (annualIncome > 2700000 && annualIncome <= 3200000) {
+    monthlyTaxExpense = (((annualIncome - 2700000) * 0.24) + (500000 * 0.06) + (500000 * 0.12) + (500000 * 0.18)) / 12;
+  } else if (annualIncome > 3200000 && annualIncome <= 3700000) {
+    monthlyTaxExpense = (((annualIncome - 3200000) * 0.3) + (500000 * 0.06) + (500000 * 0.12) + (500000 * 0.18) + (500000 * 0.24)) / 12;
+  } else if (annualIncome > 3700000) {
+    monthlyTaxExpense = (((annualIncome - 3700000) * 0.36) + (500000 * 0.06) + (500000 * 0.12) + (500000 * 0.18) + (500000 * 0.24) + (500000 * 0.3)) / 12;
   }
   
-  // Calculate the EPF
-  const epf = monthlyIncome * 0.08;
-  
-  // Calculate the take-home salary
-  const takeHomeSalary = monthlyIncome - monthlyTax - epf;
-  
-  // Display the outputs
-  monthlyTaxOutput.textContent = `Monthly Tax Expense: RM ${monthlyTax.toFixed(2)}`;
-  epfOutput.textContent = `EPF 8%: RM ${epf.toFixed(2)}`;
-  takeHomeSalaryOutput.textContent = `Take Home Salary: RM ${takeHomeSalary.toFixed(2)}`;
-}
+  const epf = (monthlyIncome * 0.08);
+  const takeHomeSalary = monthlyIncome - monthlyTaxExpense - epf;
 
-function reset() {
-  // Clear the input and outputs
-  monthlyIncomeInput.value = '';
-  monthlyTaxOutput.textContent = '';
-  epfOutput.textContent = '';
-  takeHomeSalaryOutput.textContent = '';
-}
+  document.getElementById("monthlyTaxExpense").value = monthlyTaxExpense.toFixed(2);
+  document.getElementById("epf").value = epf.toFixed(2);
+  document.getElementById("takeHomeSalary").value = takeHomeSalary.toFixed(2);
+});
