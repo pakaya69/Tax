@@ -72,6 +72,8 @@
 		    monthlyTax = (((annualIncome - 3200000) * 0.3) + 300000) / 12;
 		  } else if (annualIncome > 3700000) {
 		    monthlyTax = (((annualIncome - 3700000) * 0.36) + 450000) / 12;
+		  } else if (annualIncome < 120000) {
+			monthlyTax = 0;
 		  }
 
 		  document.getElementById("tax").value = monthlyTax.toFixed(2);
