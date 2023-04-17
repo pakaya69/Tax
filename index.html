@@ -61,7 +61,7 @@
 		  let monthlyTax = 0;
 
 		  if (annualIncome > 1200000 && annualIncome <= 1700000) {
-		    monthlyTax = ((annualIncome - 1200000) * 0.06 / 12).toFixed(2);
+		    monthlyTax = ((annualIncome - 1200000) * 0.06 / 12);
 		  } else if (annualIncome > 1700000 && annualIncome <= 2200000) {
 		    monthlyTax = (((annualIncome - 1700000) * 0.12) + 30000) / 12;
 		  } else if (annualIncome > 2200000 && annualIncome <= 2700000) {
