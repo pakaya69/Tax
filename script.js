@@ -1,30 +1,39 @@
-const calculateBtn = document.getElementById("calculateBtn");
+// Get the HTML elements
+const incomeInput = document.getElementById("income-input");
+const calculateButton = document.getElementById("calculate-button");
+const resultOutput = document.getElementById("result-output");
 
-calculateBtn.addEventListener("click", () => {
-  const monthlyIncome = parseFloat(document.getElementById("monthlyIncome").value);
-
-  // calculate monthly tax expense
-  let monthlyTaxExpense = 0;
-  const annualIncome = monthlyIncome * 12;
-  
-  if (annualIncome > 1200000 && annualIncome <= 1700000) {
-    monthlyTaxExpense = ((annualIncome - 1200000) * 0.06) / 12;
-  } else if (annualIncome > 1700000 && annualIncome <= 2200000) {
-    monthlyTaxExpense = (((annualIncome - 1700000) * 0.12) + (500000 * 0.06)) / 12;
-  } else if (annualIncome > 2200000 && annualIncome <= 2700000) {
-    monthlyTaxExpense = (((annualIncome - 2200000) * 0.18) + (500000 * 0.06) + (500000 * 0.12)) / 12;
-  } else if (annualIncome > 2700000 && annualIncome <= 3200000) {
-    monthlyTaxExpense = (((annualIncome - 2700000) * 0.24) + (500000 * 0.06) + (500000 * 0.12) + (500000 * 0.18)) / 12;
-  } else if (annualIncome > 3200000 && annualIncome <= 3700000) {
-    monthlyTaxExpense = (((annualIncome - 3200000) * 0.3) + (500000 * 0.06) + (500000 * 0.12) + (500000 * 0.18) + (500000 * 0.24)) / 12;
-  } else if (annualIncome > 3700000) {
-    monthlyTaxExpense = (((annualIncome - 3700000) * 0.36) + (500000 * 0.06) + (500000 * 0.12) + (500000 * 0.18) + (500000 * 0.24) + (500000 * 0.3)) / 12;
+// Function to calculate the tax expense
+function calculateTaxExpense(income) {
+  const annualIncome = income * 12;
+  let taxExpense = 0;
+  if (annualIncome > 1200000) {
+    if (annualIncome <= 1700000) {
+      const taxableAmount = annualIncome - 1200000;
+      taxExpense = taxableAmount * 0.06;
+    } else if (annualIncome <= 2200000) {
+      const taxableAmount = annualIncome - 1700000;
+      taxExpense = taxableAmount * 0.12 + 500000 * 0.06;
+    } else if (annualIncome <= 2700000) {
+      const taxableAmount = annualIncome - 2200000;
+      taxExpense = taxableAmount * 0.18 + 500000 * 0.12 + 500000 * 0.06;
+    } else if (annualIncome <= 3200000) {
+      const taxableAmount = annualIncome - 2700000;
+      taxExpense = taxableAmount * 0.24 + 500000 * 0.18 + 500000 * 0.12 + 500000 * 0.06;
+    } else if (annualIncome <= 3700000) {
+      const taxableAmount = annualIncome - 3200000;
+      taxExpense = taxableAmount * 0.30 + 500000 * 0.24 + 500000 * 0.18 + 500000 * 0.12 + 500000 * 0.06;
+    } else {
+      const taxableAmount = annualIncome - 3700000;
+      taxExpense = taxableAmount * 0.36 + 500000 * 0.30 + 500000 * 0.24 + 500000 * 0.18 + 500000 * 0.12 + 500000 * 0.06;
+    }
   }
-  
-  const epf = (monthlyIncome * 0.08);
-  const takeHomeSalary = monthlyIncome - monthlyTaxExpense - epf;
+  return taxExpense;
+}
 
-  document.getElementById("monthlyTaxExpense").value = monthlyTaxExpense.toFixed(2);
-  document.getElementById("epf").value = epf.toFixed(2);
-  document.getElementById("takeHomeSalary").value = takeHomeSalary.toFixed(2);
+// Event listener for the calculate button
+calculateButton.addEventListener("click", function() {
+  const income = incomeInput.value;
+  const taxExpense = calculateTaxExpense(income);
+  resultOutput.innerHTML = `Monthly tax expense: ${taxExpense.toFixed(2)}`;
 });
