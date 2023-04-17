@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title>Income Tax Calculator</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+  <meta charset="UTF-8">
+  <title>Salary Calculator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<div class="calculator">
-		<h1>Income Tax Calculator</h1>
-		<label for="income">Monthly Income:</label>
-		<input type="number" id="income" name="income">
-		<button onclick="calculate()">Calculate</button>
-		<div class="result">
-			<p>Monthly Tax Expense: <span id="tax"></span></p>
-			<p>EPF 8%: <span id="epf"></span></p>
-			<p>Take Home Salary: <span id="take-home"></span></p>
-		</div>
-	</div>
-	<script src="script.js"></script>
+  <div class="container">
+    <h1>Salary Calculator</h1>
+    <div class="input-group">
+      <label for="monthly-income">Monthly Income:</label>
+      <input type="number" id="monthly-income" min="0">
+    </div>
+    <div class="output-group">
+      <label for="monthly-tax">Monthly Tax Expense:</label>
+      <output id="monthly-tax"></output>
+    </div>
+    <div class="output-group">
+      <label for="epf">EPF 8%:</label>
+      <output id="epf"></output>
+    </div>
+    <div class="output-group">
+      <label for="take-home">Take Home Salary:</label>
+      <output id="take-home"></output>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
