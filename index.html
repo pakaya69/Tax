@@ -1,31 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Salary Calculator</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Salary Calculator</h1>
-    <div class="input-group">
-      <label for="monthly-income">Monthly Income:</label>
-      <input type="number" id="monthly-income" min="0">
-    </div>
-    <div class="output-group">
-      <label for="monthly-tax">Monthly Tax Expense:</label>
-      <output id="monthly-tax"></output>
-    </div>
-    <div class="output-group">
-      <label for="epf">EPF 8%:</label>
-      <output id="epf"></output>
-    </div>
-    <div class="output-group">
-      <label for="take-home">Take Home Salary:</label>
-      <output id="take-home"></output>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
+<html>
+  <head>
+    <title>Income Calculator</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>Income Calculator</h1>
+    <form>
+      <label for="monthlyIncome">Monthly Income:</label>
+      <input type="number" id="monthlyIncome" name="monthlyIncome" required>
+      <button type="button" onclick="calculate()">Calculate</button>
+    </form>
+    <div id="results"></div>
+    <script src="script.js"></script>
+  </body>
 </html>
