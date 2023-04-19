@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Calculator</title>
+	<title>Tax & Salary Calculator</title>
 	<style>
 		body {
 		  font-family: Arial, sans-serif;
-		  margin: 0;
-		  padding: 0;
+		  margin: 10;
+		  padding: 10;
 		}
 
 		h1 {
@@ -46,16 +46,20 @@
 	</style>
 </head>
 <body>
-	<h1>Income Tax Calculator</h1>
+	<h1>Tax & Salary Calculator</h1>
 	<label for="income">Monthly Income:</label>
 	<input type="number" id="income" name="income"><br><br>
-	<button onclick="calculateTax()">Calculate</button>
+	<button onclick="calculate()">Calculate</button>
 	<br><br>
 	<label for="tax">Monthly tax expense:</label>
-	<input type="text" id="tax" name="tax" readonly>
+	<input type="text" id="tax" name="tax" readonly><br><br>
+	<label for="epf">EPF 8%:</label>
+	<input type="text" id="epf" name="epf" readonly>
+	<label for="takehome">Take home salary:</label>
+	<input type="text" id="takehome" name="takehome" readonly><br><br>
 	
 	<script>
-		function calculateTax() {
+		function calculate() {
 		  const monthlyIncome = Number(document.getElementById("income").value);
 		  const annualIncome = monthlyIncome * 12;
 		  let monthlyTax = 0;
@@ -76,7 +80,10 @@
 			monthlyTax = 0;
 		  }
 
-		  document.getElementById("tax").value = monthlyTax.toFixed(2);
+		  const epf = monthlyIncome * 0.08;
+		  document.getElementById("tax").value = monthlyTax.toLocaleString('en-US', {minimumFractionDigits: 2});
+		  document.getElementById("epf").value = epf.toLocaleString('en-US', {minimumFractionDigits: 2});
+			document.getElementById("takehome").value = (monthlyIncome - monthlyTax - epf).toLocaleString('en-US', {minimumFractionDigits: 2});
 		}
 	</script>
 </body>
